@@ -15,6 +15,7 @@ The model has been trained extensively on diverse datasets to specialize in **re
 + 12 TrueMoney Wallet refilling without depositing the money into the cash register
 - 13 post-transaction bill editing
 ## 📥Installation
+install as a package model
 ## 📂Requirements
 ## 🖥️Usage
 ## ✒️Author and acknowledgement
