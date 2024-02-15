@@ -17,5 +17,8 @@ The model has been trained extensively on diverse datasets to specialize in **re
 ## 📥Installation
 install as a package model
 ## 📂Requirements
+- Python 3.7 or higher
+* CUDA 10.2 or higher
++ PyTorch 1.8 or higher
 ## 🖥️Usage
 ## ✒️Author and acknowledgement
