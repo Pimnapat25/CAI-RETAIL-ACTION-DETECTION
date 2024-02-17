@@ -21,4 +21,8 @@ install as a package model
 * CUDA 10.2 or higher
 + PyTorch 1.8 or higher
 ## 🖥️Usage
+Run the following command in the root directory\
+"code here"\
+After all process is done you should get an output as .csv file.\
+"output example here"
 ## ✒️Author and acknowledgement
