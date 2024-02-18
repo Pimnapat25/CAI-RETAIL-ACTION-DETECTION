@@ -195,14 +195,20 @@ After all process is done you should get an output as .csv file.\
 "output example here"
 
 ## ✒️Author and acknowledgement
-- [Your Name]
-- Email: your.email@example.com
-- GitHub: [Your GitHub Profile](https://github.com/your-username)
-
+1. Your Name
+   - Email: totti.kasidit@gmail.com
+2. Your Name
+   - Email: phatthadon.kam@gmail.com
+3. Your Name
+   - Email: pacharapor18793@gmail.com
+4. Pimnapat Koovuthyakorn
+   - Email: pimnapatkoov@gmail.com
+     
 We would like to express our gratitude to the following individuals and projects that contributed to the development of this project:
 
-- [Name of Contributor 1](https://github.com/contributor1)
-- [Name of Contributor 2](https://github.com/contributor2)
+- MMAction2 (https://github.com/open-mmlab/mmaction2/blob/main/README.md)
+- Pheradech XXX, Machine Learning Engineer at TikTok (Singapore)
+- CPALL Company
 
 
 
