@@ -35,7 +35,12 @@ To set up the necessary dependencies for your project, follow the steps below:
 !pip install -r requirements/optional.txt
 !pip install timm
 ```
-### Install 
+## 🙂Model
+Download _class_list.txt_ file [here](
+
+Download _config.py_ file [here](
+
+Download _action_recognition_model_ [here](
 ## 📂Requirements
 - Python 3.7 or higher
 * CUDA 10.2 or higher
