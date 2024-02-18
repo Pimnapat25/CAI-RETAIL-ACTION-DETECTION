@@ -1,7 +1,7 @@
 # CAI-RETAIL HACKATHON-ACTION DETECTION
 An action detection model based on TSN (Time-Sensity Networking) from [MMAction2](https://github.com/open-mmlab/mmaction2). in OpenMMLab Project.
 ## 🎯Description
-The model has been trained extensively on diverse datasets to specialize in **activity recognition** within a convenience store. It possesses the capability to determine **the position of the POS** in which action is occurring as well as precisely identify **the start and end times** of detected actions. This ensures a detailed and timely analysis of activities occurring in the store.
+The model has been trained extensively on diverse datasets to specialize in **activity recognition** within a convenience store. It possesses the capability to determine **the position of the POS** in which action is occurring as well as identify **the start and end times** of detected actions. This ensures a detailed and timely analysis of activities occurring in the store.
 
 🖊️The actions that can be recognized are as follows 🖊️:
 - 01 product purchasing
@@ -38,9 +38,9 @@ To set up the necessary dependencies for your project, follow the steps below:
 ## 🙂Model
 Download _class_list.txt_ file [here](ClassList_final.txt)
 
-Download _config.py_ file [here](
+Download _config.py_ file [here](config.py)
 
-Download _action_recognition_model_ [here](
+Download _action_recognition_model_ [here](https://drive.google.com/file/d/111y6QjIo78JjUf--j5ud4yxrKyzIfD5e/view?usp=sharing)
 ## 📂Requirements
 - Python 3.7 or higher
 * CUDA 10.2 or higher
@@ -196,8 +196,10 @@ print("CSV file generated successfully.")
 _Make sure to replace "/path/to/your/output/folder/JSON", "/path/to/your/output/folder/JSON/convert_into_CSV" with the actual file paths_
 
 ### Step 5 : Results
-After all process is done you should get an output as .csv file.\
-"output example here"
+After all processes are done you should get an output as .csv file. Here is the example!
+
+![Output](https://github.com/Pimnapat25/CAI-RETAIL-ACTION-DETECTION/assets/112639020/5ef2f844-1adf-4025-ac29-d6d978b59861)
+
 
 ## ✒️Author and acknowledgement
 1. Kasidit Prajongkarn
@@ -212,7 +214,7 @@ After all process is done you should get an output as .csv file.\
 We would like to express our gratitude to the following individuals and projects that contributed to the development of this project:
 
 - MMAction2 (https://github.com/open-mmlab/mmaction2/blob/main/README.md)
-- Pheradech XXX, Machine Learning Engineer at TikTok (Singapore)
+- คุณพีรเดช บางเจริญทรัพย์, Machine Learning Engineer at TikTok (Singapore)
 - CPALL Company
 
 
