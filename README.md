@@ -195,11 +195,11 @@ After all process is done you should get an output as .csv file.\
 "output example here"
 
 ## ✒️Author and acknowledgement
-1. Your Name
+1. Kasidit Prajongkarn
    - Email: totti.kasidit@gmail.com
-2. Your Name
+2. Phatthadon Kamnasak
    - Email: phatthadon.kam@gmail.com
-3. Your Name
+3. Pachara Subbumrer
    - Email: pacharapor18793@gmail.com
 4. Pimnapat Koovuthyakorn
    - Email: pimnapatkoov@gmail.com
