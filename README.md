@@ -17,25 +17,25 @@ The model has been trained extensively on diverse datasets to specialize in **ac
 ## 📥Installation
 To set up the necessary dependencies for your project, follow the steps below:
 
-### Step 1: Install OpenMIM, MMEngine, and MMCV
+### Install OpenMIM, MMEngine, and MMCV
 ```bash
 %pip install -U openmim
 !mim install mmengine
 !mim install "mmcv>=2.0.0"
 ```
-### Step 2 : Clone and Install MMAction2
+### Clone and Install MMAction2
 ```bash
 !rm -rf mmaction2
 !git clone https://github.com/open-mmlab/mmaction2.git -b main
 %cd mmaction2
 !pip install -e .
 ```
-### Step 3 : Install Optional Requirements and Timm
+### Install Optional Requirements and Timm
 ```bash
 !pip install -r requirements/optional.txt
 !pip install timm
 ```
-
+### Install 
 ## 📂Requirements
 - Python 3.7 or higher
 * CUDA 10.2 or higher
@@ -199,7 +199,7 @@ After all process is done you should get an output as .csv file.\
    - Email: totti.kasidit@gmail.com
 2. Phatthadon Kamnasak
    - Email: phatthadon.kam@gmail.com
-3. Pachara Subbumrer
+3. Pachara Sapbamrer
    - Email: pacharapor18793@gmail.com
 4. Pimnapat Koovuthyakorn
    - Email: pimnapatkoov@gmail.com
