@@ -36,7 +36,7 @@ To set up the necessary dependencies for your project, follow the steps below:
 !pip install timm
 ```
 ## 🙂Model
-Download _class_list.txt_ file [here](
+Download _class_list.txt_ file [here](ClassList_final.txt)
 
 Download _config.py_ file [here](
 
