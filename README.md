@@ -56,24 +56,43 @@ video_folder = "/path/to/your/video/folder"
 Run the following command in the root directory
 ```bash
 import os
+import time
+import csv
 
-for video_file in os.listdir(video_folder):
-    if video_file.endswith(".mp4"):
-        # Extract the filename without extension
-        filename = os.path.splitext(video_file)[0]
+# Set the path to the folder containing the videos
+video_folder = "/content/drive/MyDrive/CAI_Hackathon/evaluate" #<----- Here's
 
-        # Set the path for the JSON output file
-        json_output_file = os.path.join("/path/to/your/output/folder/JSON", f"{filename}.json") #<----- Here's
+runtime_csv = "/content/runtime.csv"
+runtime_dir = os.path.dirname(runtime_csv)
 
-        # Run the action detection script for each video file
-       command = f"python /path/to/mmaction2/demo/long_video_demo.py " \
-                  f"/path/to/config.py " \
-                  f"/path/to/action_recognition_model.pth " \
-                  f"\"{os.path.join(video_folder, video_file)}\" " \
-                  f"/path/to/class_list.txt " \
-                  f"\"{json_output_file}\" --input-step 25 --stride 1"
+with open(runtime_csv, mode='w', newline='') as file:
+    writer = csv.writer(file)
+    # Write header
+    writer.writerow(['filename','Runtime (Sec)'])
+    # Iterate over each video file in the folder
+    for video_file in os.listdir(video_folder):
+        if video_file.endswith(".mp4"):
+            # Extract the filename without extension
+            filename = os.path.splitext(video_file)[0]
 
-        os.system(command)
+            # Set the path for the JSON output file
+            json_output_file = os.path.join("/content/drive/MyDrive/CAI_Hackathon/ModelCAI/ResultJson", f"{filename}.json") #<----- Here's
+
+            start_time = time.time()
+
+            # Run the action detection script for each video file
+            command = f"python /content/mmaction2/demo/long_video_demo.py " \
+                      f"/content/drive/MyDrive/ModelCAI/CAI_Hackathon/TSN_RES101/Res101_W20240210_Acc605/20240210_042345/vis_data/config.py " \
+                      f"/content/drive/MyDrive/ModelCAI/CAI_Hackathon/TSN_RES101/Res101_W20240210_Acc605/best_acc_top1_epoch_50.pth " \
+                      f"\"{os.path.join(video_folder, video_file)}\" " \
+                      f"/content/drive/MyDrive/CAI_Hackathon/ModelCAI/ClassList_final.txt " \
+                      f"\"{json_output_file}\" --input-step 25 --stride 1"
+
+            os.system(command)
+            end_time = time.time()
+
+            runtime = end_time - start_time
+            writer.writerow([filename,runtime])
 ```
 _Make sure to replace "/path/to/your/video/folder", "/path/to/your/output/folder/JSON", "/path/to/config.py", "/path/to/action_recognition_model.pth", and "/path/to/class_list.txt" with the actual file paths_
 
@@ -110,7 +129,7 @@ def predict_action_segments_from_json(json_file):
     return action_segments
 
 # Set the path to the folder containing the JSON files
-json_folder = "/path/to/your/output/folder/JSON", f"{filename}.json" #<----- Here's
+json_folder = "/content/drive/MyDrive/CAI_Hackathon/ModelCAI/ResultJson" #<----- Here's
 
 # Loop over each JSON file in the folder
 for json_file_name in os.listdir(json_folder):
@@ -131,9 +150,12 @@ _Make sure to replace "/path/to/your/output/folder/JSON" with the actual file pa
 
 ### Step 4 : Convert JSON to CSV
 ```bash
+from typing_extensions import final
 import os
 import json
 import csv
+import cv2
+import time
 
 def extract_action_label(raw_action_label):
     return raw_action_label.split('=')[1].split(':')[0].strip()
@@ -166,16 +188,23 @@ def predict_action_segments_from_json(json_file):
 
     return action_segments
 
+
+
 # Set the path to the folder containing the JSON files
-json_folder = "/path/to/your/output/folder/JSON" #<----- Here's
-output_csv = "/path/to/your/output/folder/JSON/convert_into_CSV" #<----- Here's
+json_folder = "/content/drive/MyDrive/CAI_Hackathon/ModelCAI/ResultJson" #<----- Here's
+output_csv = "/content/drive/MyDrive/CAI_Hackathon/ModelCAI/ResultJson/output.csv" #<----- Here's
+
+model = YOLO("/content/drive/MyDrive/CAI_Hackathon/final_detectWeight.pt")
+
+output_csv = "/content/output.csv"
+output_dir = os.path.dirname(output_csv)
 
 # Open CSV file for writing
 with open(output_csv, mode='w', newline='') as file:
     writer = csv.writer(file)
     # Write header
-    writer.writerow(['Clipname', 'Action', 'StartTime', 'StopTime', 'POS_x', 'POS_y', 'Runtime(sec)'])
-
+    writer.writerow(["id",'ClipName', 'ActionNumber', 'StartTime', 'EndTime'])
+    count = 0
     # Iterate over each JSON file in the folder
     for json_file_name in os.listdir(json_folder):
         if json_file_name.endswith(".json"):
@@ -183,13 +212,67 @@ with open(output_csv, mode='w', newline='') as file:
             action_segments = predict_action_segments_from_json(json_file_path)
             # Extract name from file name
             name = os.path.splitext(json_file_name)[0]
-
             for action, start_time, end_time in action_segments:
                 # Convert start and stop times to frames
                 start_frame = (start_time - 25) // 25
                 stop_frame = (end_time - 25) // 25
+                count = count + 1
                 # Write row to CSV file
-                writer.writerow([name, action, start_frame, stop_frame])
+                writer.writerow([count,name, action, start_frame, stop_frame])
+
+time_csv = "/content/time.csv"
+time_dir = os.path.dirname(time_csv)
+
+with open(time_csv, mode='w', newline='') as file:
+    writer = csv.writer(file)
+    # Write header
+    writer.writerow(['Image_name','POS_x', 'POS_y'])
+    pos_x, pos_y = 0, 0
+    for img_file_name in os.listdir(evaluate_folder_path):
+      start_time = time.time()
+      img_file_path = os.path.join(evaluate_folder_path, img_file_name)
+      img = cv2.imread(img_file_path)
+      results = model.predict(img)
+
+      name = os.path.splitext(img_file_name)[0]
+
+      print(img_file_path,"--> complete")
+      if len(results[0].boxes) == 0:
+          end_time = time.time()
+          writer.writerow([name, 0, 0])
+      else:
+          for box in results[0].boxes:
+            class_id = box.cls.item()
+            if class_id == 0:
+              x1, y1, x2, y2 = map(int, box.xyxy[0].tolist())
+              pos_x_center = (x1 + x2) / 2  # Center X coordinate
+              pos_y_center = (y1 + y2) / 2  # Center Y coordinate
+              end_time = time.time()
+              writer.writerow([name,pos_x_center, pos_y_center])
+            elif class_id != 0:
+              end_time = time.time()
+              writer.writerow([name,0, 0])
+
+import pandas as pd
+
+# Read the CSV files into dataframes
+df1 = pd.read_csv('/content/output.csv')
+df2 = pd.read_csv('/content/time.csv')
+df3 = pd.read_csv('/content/runtime.csv')
+
+# Merge the dataframes based on the 'Clipname' and 'Image_name' columns
+merged_df = pd.merge(df1, df2, left_on='ClipName', right_on='Image_name')
+merged_df_2 = pd.merge(merged_df, df3, left_on='ClipName', right_on='filename')
+
+num_rows = merged_df_2.shape[0]
+
+for i in range(1, num_rows + 1):
+  merged_df_2.loc[i - 1, 'id'] = i
+
+final = merged_df_2.drop('Image_name', axis = 1)
+
+# Write the merged dataframe to a new CSV file
+final.to_csv('/content/final.csv', index=False)
 
 print("CSV file generated successfully.")
 ```
